@@ -1,19 +1,32 @@
-import { useState } from "react";
-import { invoke } from "@tauri-apps/api/core";
-import "./App.css";
+import { Layers, Workflow } from "lucide-react"
+
+import { NotesList } from "@/components/notes-list"
+import { NoteDetail } from "@/components/note-detail"
+import { PlaceholderView } from "@/components/placeholder-view"
+import { useAppState } from "@/lib/app-state"
+import "./App.css"
 
 function App() {
+  const { activeView } = useAppState()
 
-  // async function greet() {
-  //   // Learn more about Tauri commands at https://tauri.app/develop/calling-rust/
-  //   setGreetMsg(await invoke("greet", { name }));
-  // }
+  if (activeView === "mindmaps") {
+    return (
+      <PlaceholderView title="Mindmaps" icon={Workflow} actionLabel="New Mindmap" />
+    )
+  }
+
+  if (activeView === "flashcards") {
+    return (
+      <PlaceholderView title="Flashcards" icon={Layers} actionLabel="New Flashcard Deck" />
+    )
+  }
 
   return (
-    <div className="grow p-4">
-    Content
+    <div className="flex h-full flex-1 overflow-hidden">
+      <NotesList />
+      <NoteDetail />
     </div>
-  );
+  )
 }
 
-export default App;
+export default App
