@@ -16,6 +16,7 @@ import {
 } from "@/components/ui/sidebar"
 import { notebooks, tagColorClasses, tags } from "@/lib/mock-data"
 import { useAppState, type View } from "@/lib/app-state"
+import { cn } from "@/lib/utils"
 
 const navMain: { title: string; view: View; icon: React.ElementType; count: number }[] = [
   { title: "Notes", view: "notes", icon: FileText, count: 4 },
@@ -41,7 +42,13 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
                     <div className="flex items-center justify-between">
                       <div className="flex items-center gap-2">
                         <item.icon />
-                        <span className="font-medium">{item.title}</span>
+                        <span
+                          className={cn(
+                            activeView === item.view ? "font-bold" : "font-normal"
+                          )}
+                        >
+                          {item.title}
+                        </span>
                       </div>
                     </div>
                   }

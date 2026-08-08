@@ -12,6 +12,11 @@ export interface Notebook {
   count: number
 }
 
+export type OutputBlock =
+  | { type: "paragraph"; text: string }
+  | { type: "heading"; text: string }
+  | { type: "list"; items: { term: string; text?: string }[] }
+
 export interface Note {
   id: string
   title: string
@@ -20,7 +25,7 @@ export interface Note {
   updatedAt: string
   preview: string
   editorText: string
-  outputText: string
+  output: OutputBlock[]
 }
 
 export const tags: Tag[] = [
@@ -44,8 +49,21 @@ export const notes: Note[] = [
     preview: "Cells are the basic building blocks of life...",
     editorText:
       "# Cell Structure\n\nCells are the basic building blocks of life.\n\nEvery organism is composed of one or more cells.\n\n## Key Organelles\n\n- Nucleus — stores genetic material\n- Mitochondria — generates energy\n- Cell Membrane — regulates transport",
-    outputText:
-      "Cells are the basic building blocks of life. Every organism is composed of one or more cells, which carry out the functions necessary for survival.\n\nKey Organelles\n\nNucleus — stores genetic material and controls cell activity\nMitochondria — generates energy through cellular respiration\nCell Membrane — regulates what enters and exits the cell",
+    output: [
+      {
+        type: "paragraph",
+        text: "Cells are the basic building blocks of life. Every organism is composed of one or more cells, which carry out the functions necessary for survival.",
+      },
+      { type: "heading", text: "Key Organelles" },
+      {
+        type: "list",
+        items: [
+          { term: "Nucleus", text: "stores genetic material and controls cell activity" },
+          { term: "Mitochondria", text: "generates energy through cellular respiration" },
+          { term: "Cell Membrane", text: "regulates what enters and exits the cell" },
+        ],
+      },
+    ],
   },
   {
     id: "world-war-ii",
@@ -56,8 +74,17 @@ export const notes: Note[] = [
     preview: "Began in 1939 after Germany invaded Poland...",
     editorText:
       "# World War II\n\nBegan in 1939 after Germany invaded Poland.\n\n## Major Powers\n\n- Allies\n- Axis",
-    outputText:
-      "World War II began in 1939 after Germany invaded Poland.\n\nMajor Powers\n\nThe conflict was fought primarily between the Allied and Axis powers.",
+    output: [
+      {
+        type: "paragraph",
+        text: "World War II began in 1939 after Germany invaded Poland.",
+      },
+      { type: "heading", text: "Major Powers" },
+      {
+        type: "list",
+        items: [{ term: "Allies" }, { term: "Axis" }],
+      },
+    ],
   },
   {
     id: "cold-war",
@@ -68,8 +95,12 @@ export const notes: Note[] = [
     preview: "A period of geopolitical tension between...",
     editorText:
       "# Cold War\n\nA period of geopolitical tension between the United States and the Soviet Union.",
-    outputText:
-      "The Cold War was a period of geopolitical tension between the United States and the Soviet Union that lasted from roughly 1947 to 1991.",
+    output: [
+      {
+        type: "paragraph",
+        text: "The Cold War was a period of geopolitical tension between the United States and the Soviet Union that lasted from roughly 1947 to 1991.",
+      },
+    ],
   },
   {
     id: "photosynthesis",
@@ -80,8 +111,17 @@ export const notes: Note[] = [
     preview: "Plants convert light energy into chemical...",
     editorText:
       "# Photosynthesis\n\nPlants convert light energy into chemical energy.\n\n## Formula\n\n6CO2 + 6H2O -> C6H12O6 + 6O2",
-    outputText:
-      "Plants convert light energy into chemical energy stored in glucose, using carbon dioxide and water and releasing oxygen as a byproduct.",
+    output: [
+      {
+        type: "paragraph",
+        text: "Plants convert light energy into chemical energy stored in glucose, using carbon dioxide and water and releasing oxygen as a byproduct.",
+      },
+      { type: "heading", text: "Formula" },
+      {
+        type: "paragraph",
+        text: "6CO2 + 6H2O → C6H12O6 + 6O2",
+      },
+    ],
   },
 ]
 

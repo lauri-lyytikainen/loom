@@ -2,8 +2,40 @@ import { Eye, FileText, Pencil, Plus, SquareSplitHorizontal } from "lucide-react
 
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
-import { notes } from "@/lib/mock-data"
+import { notes, type OutputBlock } from "@/lib/mock-data"
 import { useAppState } from "@/lib/app-state"
+
+function OutputBlocks({ blocks }: { blocks: OutputBlock[] }) {
+  return (
+    <div className="flex flex-col gap-4 text-sm">
+      {blocks.map((block, i) => {
+        if (block.type === "heading") {
+          return (
+            <h3 key={i} className="text-xs font-bold tracking-wide text-muted-foreground uppercase">
+              {block.text}
+            </h3>
+          )
+        }
+        if (block.type === "list") {
+          return (
+            <ul key={i} className="flex flex-col gap-2">
+              {block.items.map((item) => (
+                <li key={item.term} className="flex gap-2">
+                  <span>·</span>
+                  <span>
+                    <span className="font-bold">{item.term}</span>
+                    {item.text ? ` — ${item.text}` : null}
+                  </span>
+                </li>
+              ))}
+            </ul>
+          )
+        }
+        return <p key={i}>{block.text}</p>
+      })}
+    </div>
+  )
+}
 
 export function NoteDetail() {
   const { selectedNoteId } = useAppState()
@@ -54,7 +86,7 @@ export function NoteDetail() {
           </div>
         </div>
         <div className="overflow-auto p-4">
-          <div className="whitespace-pre-wrap text-sm">{note.outputText}</div>
+          <OutputBlocks blocks={note.output} />
         </div>
       </div>
     </div>

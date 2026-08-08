@@ -28,13 +28,28 @@ export function NotesList() {
               key={note.id}
               onClick={() => setSelectedNoteId(note.id)}
               className={cn(
-                "flex flex-col gap-1 rounded-md p-2.5 text-left transition-colors hover:bg-muted",
-                selectedNoteId === note.id && "bg-muted"
+                "flex flex-col gap-1 rounded-md p-2.5 text-left transition-colors hover:bg-indigo-500/5 dark:hover:bg-indigo-500/10",
+                selectedNoteId === note.id &&
+                  "bg-indigo-500/10 hover:bg-indigo-500/10 dark:bg-indigo-500/15 dark:hover:bg-indigo-500/15"
               )}
             >
               <div className="flex items-center gap-1.5">
-                <FileText className="size-4 shrink-0 text-muted-foreground" />
-                <span className="truncate font-medium">{note.title}</span>
+                <FileText
+                  className={cn(
+                    "size-4 shrink-0",
+                    selectedNoteId === note.id
+                      ? "text-indigo-600 dark:text-indigo-400"
+                      : "text-muted-foreground"
+                  )}
+                />
+                <span
+                  className={cn(
+                    "truncate font-bold",
+                    selectedNoteId === note.id && "text-indigo-600 dark:text-indigo-400"
+                  )}
+                >
+                  {note.title}
+                </span>
               </div>
               <div className="flex items-center gap-2 text-xs text-muted-foreground">
                 <span>{note.updatedAt}</span>
