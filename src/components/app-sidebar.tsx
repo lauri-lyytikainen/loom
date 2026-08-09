@@ -1,5 +1,5 @@
 import * as React from "react"
-import { FileText, Trash2, Workflow, Layers } from "lucide-react"
+import { FileText, Workflow, Layers, Settings } from "lucide-react"
 
 import {
   Sidebar,
@@ -103,8 +103,8 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
             <SidebarMenuButton
               render={
                 <div className="flex items-center gap-2 text-muted-foreground">
-                  <Trash2 />
-                  <span>Trash</span>
+                  <Settings />
+                  <span>Settings</span>
                 </div>
               }
             />
