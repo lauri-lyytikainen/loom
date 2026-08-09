@@ -11,13 +11,23 @@ function App() {
 
   if (activeView === "mindmaps") {
     return (
-      <PlaceholderView title="Mindmaps" icon={Workflow} actionLabel="New Mindmap" />
+      <PlaceholderView
+        title="No mindmaps yet"
+        description="Create a mindmap to visually connect your ideas and notes."
+        icon={Workflow}
+        actionLabel="New Mindmap"
+      />
     )
   }
 
   if (activeView === "flashcards") {
     return (
-      <PlaceholderView title="Flashcards" icon={Layers} actionLabel="New Flashcard Deck" />
+      <PlaceholderView
+        title="No flashcards yet"
+        description="Create a deck to start studying with flashcards."
+        icon={Layers}
+        actionLabel="New Flashcard Deck"
+      />
     )
   }
 
