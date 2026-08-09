@@ -17,6 +17,7 @@ import {
 import { notebooks, tagColorClasses, tags } from "@/lib/mock-data"
 import { useAppState, type View } from "@/lib/app-state"
 import { cn } from "@/lib/utils"
+import { SettingsDialog } from "@/components/settings-dialog"
 
 const navMain: { title: string; view: View; icon: React.ElementType; count: number }[] = [
   { title: "Notes", view: "notes", icon: FileText, count: 4 },
@@ -100,14 +101,16 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
       <SidebarFooter>
         <SidebarMenu>
           <SidebarMenuItem>
-            <SidebarMenuButton
-              render={
-                <div className="flex items-center gap-2 text-muted-foreground">
-                  <Settings />
-                  <span>Settings</span>
-                </div>
-              }
-            />
+            <SettingsDialog>
+              <SidebarMenuButton
+                render={
+                  <div className="flex items-center gap-2 text-muted-foreground">
+                    <Settings />
+                    <span>Settings</span>
+                  </div>
+                }
+              />
+            </SettingsDialog>
           </SidebarMenuItem>
         </SidebarMenu>
       </SidebarFooter>
